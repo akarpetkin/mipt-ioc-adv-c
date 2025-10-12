@@ -1,19 +1,18 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c99 -lncurses -DNCURSES_STATIC
+GCC=gcc
+CFLAGS=-Wall -Wextra -std=c99 -lncurses -DNCURSES_STATIC -g
 LIBS = -lncurses
-TARGET = snake
-SOURCES = snake.c scheduler.c
-OBJECTS = $(SOURCES:.c=.o)
 
-all: $(TARGET)
+all: clean snake
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
+snake.o: snake.c
+	$(GCC) $(CFLAGS) -c -o snake.o snake.c
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+scheduler.o: scheduler.c
+	$(GCC) $(CFLAGS) -c -o scheduler.o scheduler.c
+
+snake: snake.o scheduler.o
+	$(GCC) $(CFLAGS) -o snake snake.o scheduler.o $(LIBS)
 
 clean:
-	rm -f $(TARGET) $(OBJECTS)
-
-.PHONY: all clean
+	del *.o
+	del *.exe

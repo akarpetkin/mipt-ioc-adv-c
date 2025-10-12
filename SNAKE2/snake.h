@@ -11,7 +11,8 @@ enum {
     HEAD_SYMBOL = '@',
     TAIL_SYMBOL = '#',
     STOP_GAME = KEY_F(10),
-    CONTROLS_COUNT = 2
+    CONTROLS_COUNT = 2,
+    SNAKES_COUNT = 2
 };
 
 enum {
@@ -68,10 +69,10 @@ typedef struct {
 } food_t;
 
 typedef struct {
-    snake_t *snake;
+    snake_t *snakes;
     food_t *food;
     
-    int score;
+    int *scores;
     int game_over;
     int should_quit;
 } game_context_t;
